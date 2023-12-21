@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엘리트 교복관리법</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/common.js"></script>
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+</head>
+<body>
+    <div class="leftMenu">
+        <strong>매장&문의</strong>
+        <a href="#">매장찾기</a>
+        <a href="#">Q&A</a>
+        <a href="#" class="on">교복관리 TIP</a>
+      </div>
+    <div class="wrap">
+        <div class="section visual">
+            <img src="img/sub3_4_visual_v2.jpg" alt=""/>
+            <div class="visualFootBt4">
+                <a href="javascript:;" class="on"><span>바지,스커트</span></a>
+                <a href="javascript:;"><span>셔츠,블라우스</span></a>
+                <a href="javascript:;"><span>니트</span></a>
+                <a href="javascript:;"><span>자켓</span></a>
+                <a href="javascript:;"><span>생활복</span></a>
+            </div>
+        </div>
+        <div class="management">
+            <ul class="managementTab">
+                <li><a href="javascript:;" class="on"><span>바지,스커트</span></a></li>
+                <li><a href="javascript:;"><span>셔츠,블라우스</span></a></li>
+                <li><a href="javascript:;"><span>니트</span></a></li>
+                <li><a href="javascript:;"><span>자켓</span></a></li>
+                <li><a href="javascript:;"><span>생활복</span></a></li>
+            </ul>
+            <div class="managementCont managementCont1">
+                <img src="img/바지&스커트.png" alt="">
+            </div>
+            <div class="managementCont managementCont2">
+                <img src="img/블라우스&셔츠.png" alt="">
+            </div>
+            <div class="managementCont managementCont3">
+                <img src="img/니트류.png" alt="">
+            </div>
+            <div class="managementCont managementCont4">
+                <img src="img/자켓.png" alt="">
+            </div>
+            <div class="managementCont managementCont5">
+                <img src="img/생활복.png" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(window).load(function(){
+            if ($('.wrap .visual').height() > $(window).height()){
+                $('.visualFootBt4').css('position','fixed');
+            }else{
+                $('.visualFootBt4').css('position','absolute');
+            }
+        })
+        $(window).scroll(function(){
+            if ($('.wrap .visual').height() > $(window).height()){
+                if ($(document).scrollTop() > $('.wrap .visual').height() - $(window).height()){
+                    $('.visualFootBt4').css('position','absolute');
+                }else{
+                    $('.visualFootBt4').css('position','fixed');
+                }
+    
+                if ($(document).scrollTop() > $('.wrap .visual').height() - $(window).height() +100){
+                    $('.visualFootBt4').fadeOut('fast');
+                }else{
+                    $('.visualFootBt4').fadeIn('fast');
+                }
+            }else{
+                $('.visualFootBt4').css('position','absolute');
+            }
+        })
+        $(window).resize(function(){
+            if ($('.wrap .visual').height() > $(window).height()){
+                $('.visualFootBt4').css('position','fixed');
+            }else{
+                $('.visualFootBt4').css('position','absolute');
+            }
+        })
+    
+        $('.managementTab li').each(function(){
+            $(this).find('a').on('click',function(){
+                $(this).addClass('on').parent().siblings().find('a').removeClass('on');
+                $('.visualFootBt4 a').eq($(this).parent().index()).addClass('on').siblings().removeClass('on');
+                $('.managementCont').hide();
+                $('.managementCont'+($(this).parent().index()+1)).show();
+                $('html, body').animate({
+                    scrollTop:$('.management').offset().top
+                },500)
+                return false;
+            })
+        })
+        $('.visualFootBt4 a').each(function(){
+            $(this).on('click',function(){
+                $(this).addClass('on').siblings().removeClass('on');
+                $('.managementTab li').eq($(this).index()).find('a').addClass('on').parent().siblings().find('a').removeClass('on');
+                $('.managementCont').hide();
+                $('.managementCont'+($(this).index()+1)).show();
+                $('html, body').animate({
+                    scrollTop:$('.management').offset().top
+                },500)
+                return false;
+            })
+        })
+    </script>
+</body>
+</html> 
